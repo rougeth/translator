@@ -75,8 +75,7 @@ my_str = r1.read()
 #fecha conexão
 conn.close()
 
-my_str = str(my_str)
-my_str = repr(my_str)
+my_str = str(my_str, 'latin-1')
 
 #Dicionário representando a classificação das palavras e sua tradução.
 classes = {"noun":"substantivo", "verb":"verbo", "pronoun":"pronome", "adjective":"adjetivo", "article":"artigo"}
