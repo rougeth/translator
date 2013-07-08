@@ -23,7 +23,7 @@ verbo :
 "brincar","gracejar","dizer graças","rir-se de alguém"
 
 
-$ translator hello
+$ translate hello
 interjeição :
 "Olá!","Oi!"
 ```
