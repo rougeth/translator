@@ -9,5 +9,21 @@ results.
 
 1. `$ cd /opt`
 2. `$ sudo git clone https://github.com/allisonmachado/translator`
-3. `$ sudo chmod u+x translator/main.py`
-4. `$ sudo ln -s /opt/translator/main.py /user/bin/translator`
+3. `$ sudo chmod a+x translator/main.py`
+4. `$ sudo ln -s /opt/translator/main.py /usr/bin/translate`
+
+## usage
+
+```
+$ translate joke
+substantivo :
+"gracejo","piada","brincadeira","graça","pilhéria","dito de espírito"
+
+verbo :
+"brincar","gracejar","dizer graças","rir-se de alguém"
+
+
+$ translator hello
+interjeição :
+"Olá!","Oi!"
+```
