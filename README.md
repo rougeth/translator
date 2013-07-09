@@ -21,9 +21,4 @@ substantivo :
 
 verbo :
 "brincar","gracejar","dizer graças","rir-se de alguém"
-
-
-$ translate hello
-interjeição :
-"Olá!","Oi!"
 ```
