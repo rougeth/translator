@@ -1,17 +1,26 @@
-# -*- coding: utf-8 -*-
 
 import http.client
 
 class GoogleTranslate:
+
     def __init__(self):
+
         # This dictionary contains the word class translations
-        self.classes = {"interjection":"interjeição" ,"noun":"substantivo", "verb":"verbo", "pronoun":"pronome", "adjective":"adjetivo", "article":"artigo"}
+        self.classes = {
+            "interjection":"interjeição",
+            "noun":"substantivo",
+            "verb":"verbo",
+            "pronoun":"pronome",
+            "adjective":"adjetivo",
+            "article":"artigo"
+        }
+
         # The string will contain the return from the http request
         self.http_returned_string = ""
 
     def show_ident_str(self):
         """
-        This is a helper funtion for reading the huge 
+        This is a helper funtion for reading the huge
         string returned by the http query.
         """
         counter = 0
