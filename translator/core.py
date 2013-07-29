@@ -5,7 +5,8 @@ translator.Translator
 Módulo básico utilizado na tradução
 '''
 
-from translator.packages import *
+from packages import requests
+from packages.clint.textui import colored
 
 
 class Translator:
