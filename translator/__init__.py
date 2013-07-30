@@ -26,9 +26,6 @@ class Translator:
             'Content-Type': 'text/javascript; charset=UTF-8'
         }
 
-        self.DICT = {}
-
-
     def request(self):
         '''
         '''
@@ -41,15 +38,15 @@ class Translator:
             headers=self.HEADERS
         )
 
-        # Transforma a string de retorn em um dicionário
+        # Transforma a string de retorn em formato json
         req_json = req.json()
 
         return self.organize_dict(req_json)
 
-    def organize_dict(self, req_json):
+    def organize_dict(self, r):
         '''
-        Cria um novo dicionário contendo apenas informações necessárias.
-        Exemplo:
+        Função retorna um novo dicionário contendo apenas informações
+        necessárias, como por exemplo:
 
         {
             orig: original word
@@ -67,9 +64,11 @@ class Translator:
             ]
         }
         '''
-        r = req_json
 
-        dictionary = {} # Cria o dicionário
+        # Cria o dicionário que irá conter as informações filtradas da
+        # requisição
+        dictionary = {}
+
         dictionary['orig'] = r['sentences'][0]['orig']
         dictionary['trans'] = r['sentences'][0]['trans']
 
@@ -83,12 +82,12 @@ class Translator:
                 'terms': _class['terms'][:5]
             })
 
-        # Retorna novo dicionário, contendo informações úteis
         return dictionary
 
     def show(self, detailed=False):
 
         d = self.request()
+
         # Imprime a tradução
         print('{0}: {1}'.format(
             colored.white(self.PARAMS['tl']),
