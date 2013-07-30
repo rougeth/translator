@@ -10,47 +10,47 @@ from translator.packages import *
 
 class Translator:
 
-    URL = 'http://translate.google.com/translate_a/t'
+    def __init__(self, word, source_word='en', targe_language='pt'):
 
-    PARAMS = {
-        'client': 'j',
-        'text': None,
-        'sl': 'en',
-        'tl': 'pt'
-    }
+        self.URL = 'http://translate.google.com/translate_a/t'
 
-    HEADERS = {
-        'Accept-language': 'pt',
-        'Content-Type': 'text/javascript; charset=UTF-8'
-    }
+        self.PARAMS = {
+            'client': 'j',
+            'text': word,
+            'sl': source_word,
+            'tl': targe_language
+        }
 
-    REQ = None
-    DICT = {}
+        self.HEADERS = {
+            'Accept-language': 'pt',
+            'Content-Type': 'text/javascript; charset=UTF-8'
+        }
 
-    def __init__(self, word, targe_language=None, source_word=None):
-
-        self.PARAMS['text'] = word
-
-        if source_word:
-            self.PARAMS['sl'] = source_word
-
-        if targe_language:
-            self.PARAMS['tl'] = targe_language
+        self.DICT = {}
 
 
     def request(self):
+        '''
+        '''
 
+        # Realiza uma requisição GET na url informada, passando os parâmetros e
+        # cabeçalhos
         req = requests.get(
             url=self.URL,
             params=self.PARAMS,
             headers=self.HEADERS
         )
 
-        self.REQ = req.json()
+        # Transforma a string de retorn em um dicionário
+        req_json = req.json()
 
-    def organize_dict(self):
+        return self.organize_dict(req_json)
 
+    def organize_dict(self, req_json):
         '''
+        Cria um novo dicionário contendo apenas informações necessárias.
+        Exemplo:
+
         {
             orig: original word
             trans: translated word
@@ -67,11 +67,14 @@ class Translator:
             ]
         }
         '''
-        r = self.REQ
+        r = req_json
 
-        dictionary = {}
+        dictionary = {} # Cria o dicionário
         dictionary['orig'] = r['sentences'][0]['orig']
         dictionary['trans'] = r['sentences'][0]['trans']
+
+        # Para cada classe (artigo, substantivo, etc) adiciona o nome da classe
+        # e seus termos em uma lista
         dictionary['classes'] = []
 
         for _class in r['dict']:
@@ -79,21 +82,20 @@ class Translator:
                 'name': _class['pos'],
                 'terms': _class['terms'][:5]
             })
+
+        # Retorna novo dicionário, contendo informações úteis
         return dictionary
 
     def show(self, detailed=False):
 
-        self.request()
-
-        d = self.organize_dict()
-
-        # Translation
+        d = self.request()
+        # Imprime a tradução
         print('{0}: {1}'.format(
             colored.white(self.PARAMS['tl']),
             colored.red(d['trans'])
         ))
 
-        # More information about the word translated
+        # Caso solicitado, imprime mais informações
         if detailed:
             print('{0}: {1}'.format(
                 colored.white(self.PARAMS['sl']),
