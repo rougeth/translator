@@ -8,6 +8,8 @@ Módulo básico utilizado na tradução
 from translator.packages import *
 
 
+__version__ = '0.2.0'
+
 class Translator:
 
     def __init__(self, word, source_word='en', targe_language='pt'):
