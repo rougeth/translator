@@ -5,8 +5,8 @@ translator.Translator
 Módulo básico utilizado na tradução
 '''
 
-from translator.packages import *
-
+import requests
+from clint.textui import colored
 
 __version__ = '0.2.0'
 
