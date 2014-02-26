@@ -2,7 +2,8 @@ class Translator:
 
     def __init__(self, word):
 
-        # Línguas suportadas pelo Google Translate
+        # Languages supported by Google Translate
+        # TODO: complete the list
         self.supported_languages = (
             ('af', 'africâner'),
             ('sq', 'albanês'),
@@ -22,7 +23,6 @@ class Translator:
             ('ko', 'koreano'),
             ('en', 'inglês'),
             ('pt', 'português')
-            # completar a lista
         )
 
         self.url = 'http://translate.google.com/translate_a/t'
@@ -34,13 +34,13 @@ class Translator:
             'tl': 'pt'
         }
 
+        # TODO: Support others languages
         self.headers = {
             'Accept-language': 'pt',
             'Content-Type': 'text/javascript; charset=UTF-8'
         }
 
     def source_language(self, sl):
-        ''' Muda língua de origem da palavra '''
 
         for language in self.supported_languages:
             if sl in language:
@@ -50,7 +50,6 @@ class Translator:
         return False
 
     def target_language(self, tl):
-        ''' Muda língua em que a palavra será traduzida '''
 
         for language in self.supported_languages:
             if tl in language:
